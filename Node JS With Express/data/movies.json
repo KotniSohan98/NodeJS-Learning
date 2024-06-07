@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Die Hard",
+    "reLeaseYear": 1998,
+    "duration": 90
+  },
+  {
+    "id": 2,
+    "name": "Expandables",
+    "reLeaseYear": 2008,
+    "duration": 80
+  },
+  {
+    "id": 3,
+    "name": "Interstaller",
+    "reLeaseYear": 2014,
+    "duration": 120
+  }
+]
