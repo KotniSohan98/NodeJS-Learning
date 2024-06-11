@@ -2,6 +2,21 @@ const fs = require("fs");
 
 let movies = JSON.parse(fs.readFileSync("./data/movies.json"));
 
+exports.checkId = (req, res, next, value) => {
+  console.log("Movie ID is " + value);
+  //Find movie based on ID parameter
+  let movie = movies.find((el) => el.id === value * 1);
+
+  //Particular ID movie not there then send failed status
+  if (!movie) {
+    return res.status(404).json({
+      status: "Failed",
+      message: "Movie with ID " + value + " is not found",
+    });
+  }
+  next();
+};
+
 //Route Handlier functions
 exports.getAllMovies = (req, res) => {
   res.status(200).json({
@@ -18,16 +33,17 @@ exports.getMovie = (req, res) => {
   //   console.log(req.params);
   //Convert ID string to number type
   const id = req.params.id * 1;
+
   //Find movie based on ID parameter
-  let movie = movies.find((el) => el.id === id);
+  let movie = movies.find((el) => el.id === id * 1);
 
   //Particular ID movie not there then send failed status
-  if (!movie) {
-    return res.status(404).json({
-      status: "Failed",
-      message: "Movie with ID " + id + " is not found",
-    });
-  }
+  //   if (!movie) {
+  //     return res.status(404).json({
+  //       status: "Failed",
+  //       message: "Movie with ID " + value + " is not found",
+  //     });
+  //   }
 
   //send particular Id movie in the response
   res.status(200).json({
@@ -44,12 +60,12 @@ exports.updateMovie = (req, res) => {
   let id = req.params.id * 1;
   let movieToUpdate = movies.find((el) => el.id === id);
 
-  if (!movieToUpdate) {
-    return res.status(404).json({
-      status: "Failed",
-      message: "Movie with ID " + id + " is not found",
-    });
-  }
+  //   if (!movieToUpdate) {
+  //     return res.status(404).json({
+  //       status: "Failed",
+  //       message: "Movie with ID " + id + " is not found",
+  //     });
+  //   }
 
   let index = movies[movieToUpdate];
 
@@ -87,12 +103,12 @@ exports.deletMovie = (req, res) => {
   const id = req.params.id * 1;
   const movieToDelete = movies.find((el) => el.id === id);
 
-  if (!movieToDelete) {
-    return res.status(404).json({
-      status: "Failed",
-      message: "Movie with ID " + id + " is not found",
-    });
-  }
+  //   if (!movieToDelete) {
+  //     return res.status(404).json({
+  //       status: "Failed",
+  //       message: "Movie with ID " + id + " is not found",
+  //     });
+  //   }
 
   const index = movies.indexOf(movieToDelete);
 
