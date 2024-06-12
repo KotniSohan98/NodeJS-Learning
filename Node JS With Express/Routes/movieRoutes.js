@@ -13,7 +13,7 @@ router.param("id", movoiesController.checkId);
 router
   .route("/")
   .get(movoiesController.getAllMovies)
-  .post(movoiesController.createMovie);
+  .post(movoiesController.validateBody, movoiesController.createMovie); //We are chaining multiple middleware
 
 router
   .route("/:id")
